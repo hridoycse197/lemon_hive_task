@@ -10,7 +10,7 @@ class SpaceVerticalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: mediaQueryWidth(context, height),
+      height: mediaQueryWidth(height,context, ),
     );
   }
 }

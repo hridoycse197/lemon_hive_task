@@ -11,7 +11,7 @@ class SpaceHorizontalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width:mediaQueryWidth(context, width),
+      width:mediaQueryWidth(width,context, ),
     );
   }
 }

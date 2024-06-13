@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-double mediaQueryHeight(BuildContext context, double size) =>
+double mediaQueryHeight( double size,BuildContext context,) =>
     (MediaQuery.of(context).size.height / 932) * size;
-double mediaQueryWidth(BuildContext context, double size) =>
+double mediaQueryWidth( double size,BuildContext context,) =>
     (MediaQuery.of(context).size.width / 432) * size;
 double fullHeight(BuildContext context) => (MediaQuery.of(context).size.height);
 double fullWidth(BuildContext context) => (MediaQuery.of(context).size.width);

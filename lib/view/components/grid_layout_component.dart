@@ -17,13 +17,11 @@ class SliverGridWithCustomGeometryLayout extends SliverGridRegularTileLayout {
     required double childMainAxisExtent,
     required double childCrossAxisExtent,
     required bool reverseCrossAxis,
-  })  : assert(geometryBuilder != null),
-        assert(crossAxisCount != null && crossAxisCount > 0),
-        assert(mainAxisStride != null && mainAxisStride >= 0),
-        assert(crossAxisStride != null && crossAxisStride >= 0),
-        assert(childMainAxisExtent != null && childMainAxisExtent >= 0),
-        assert(childCrossAxisExtent != null && childCrossAxisExtent >= 0),
-        assert(reverseCrossAxis != null),
+  })  : assert(crossAxisCount > 0),
+        assert(mainAxisStride >= 0),
+        assert(crossAxisStride >= 0),
+        assert(childMainAxisExtent >= 0),
+        assert(childCrossAxisExtent >= 0),
         super(
           crossAxisCount: crossAxisCount,
           mainAxisStride: mainAxisStride,
@@ -41,7 +39,8 @@ class SliverGridWithCustomGeometryLayout extends SliverGridRegularTileLayout {
 
 /// Creates grid layouts with a fixed number of tiles in the cross axis, such
 /// that fhe last element, if the grid item count is odd, is centralized.
-class SliverGridDelegateWithFixedCrossAxisCountAndCentralizedLastElement extends SliverGridDelegateWithFixedCrossAxisCount {
+class SliverGridDelegateWithFixedCrossAxisCountAndCentralizedLastElement
+    extends SliverGridDelegateWithFixedCrossAxisCount {
   /// The total number of itens in the layout.
   final int itemCount;
 
@@ -51,11 +50,11 @@ class SliverGridDelegateWithFixedCrossAxisCountAndCentralizedLastElement extends
     double mainAxisSpacing = 0.0,
     double crossAxisSpacing = 0.0,
     double childAspectRatio = 1.0,
-  })  : assert(itemCount != null && itemCount > 0),
-        assert(crossAxisCount != null && crossAxisCount > 0),
-        assert(mainAxisSpacing != null && mainAxisSpacing >= 0),
-        assert(crossAxisSpacing != null && crossAxisSpacing >= 0),
-        assert(childAspectRatio != null && childAspectRatio > 0),
+  })  : assert(itemCount > 0),
+        assert(crossAxisCount > 0),
+        assert(mainAxisSpacing >= 0),
+        assert(crossAxisSpacing >= 0),
+        assert(childAspectRatio > 0),
         super(
           crossAxisCount: crossAxisCount,
           mainAxisSpacing: mainAxisSpacing,
@@ -84,8 +83,9 @@ class SliverGridDelegateWithFixedCrossAxisCountAndCentralizedLastElement extends
       geometryBuilder: (index, layout) {
         return SliverGridGeometry(
           scrollOffset: (index ~/ crossAxisCount) * layout.mainAxisStride,
-          crossAxisOffset:
-              itemCount.isOdd && index == itemCount - 1 ? layout.crossAxisStride / 2 : _getOffsetFromStartInCrossAxis(index, layout),
+          crossAxisOffset: itemCount.isOdd && index == itemCount - 1
+              ? layout.crossAxisStride / 2
+              : _getOffsetFromStartInCrossAxis(index, layout),
           mainAxisExtent: childMainAxisExtent,
           crossAxisExtent: childCrossAxisExtent,
         );

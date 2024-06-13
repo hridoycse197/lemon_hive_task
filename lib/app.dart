@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:lemon_hive_task/utils/app_colors.dart';
 import 'package:lemon_hive_task/view/view/splash_screen.dart';
+
+import 'view/view/main_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,8 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     
-      home:const SplashScreen(),
+      home: MainScreen(),
     );
   }
 }

@@ -11,18 +11,18 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: AppColors.splashBgColor,
+        color: AppColors.primaryColor,
         height: fullHeight(context),
         width: fullWidth(context),
         child: Stack(
           children: [
             Positioned(
                 top: 0,
-                right: mediaQueryWidth(context, -60),
+                right: mediaQueryWidth( -60,context,),
                 child: Image.asset("assets/images/right_top_vector.png")),
             Positioned(
                 top: mediaQueryHeight(
-                    context, MediaQuery.of(context).size.height / 2 + 110),
+                     MediaQuery.of(context).size.height / 2 + 110,context,),
                 right: 0,
                 child: Image.asset("assets/images/right_center_vector.png")),
             Positioned(
@@ -35,11 +35,11 @@ class SplashScreen extends StatelessWidget {
                 child: Image.asset("assets/images/left_bottom_vector.png")),
             Positioned(
                 top: mediaQueryHeight(
-                    context, MediaQuery.of(context).size.height / 2 - 120),
+                    MediaQuery.of(context).size.height / 2 - 120, context,),
                 left: 0,
                 child: Image.asset("assets/images/left_center_vector.png")),
             Positioned(
-                top: mediaQueryHeight(context, -130),
+                top: mediaQueryHeight( -130,context,),
                 left: 0,
                 child: Image.asset("assets/images/left_top_vector.png")),
             Center(
