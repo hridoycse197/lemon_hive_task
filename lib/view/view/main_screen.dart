@@ -8,7 +8,7 @@ import 'details_screen.dart';
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   List<Widget> pages = [HomeScreen(), const DetailsScreen()];
-  int selectedPage = 0;
+  int selectedPage = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,9 @@ class MainScreen extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.person_2), label: 'Home')
           ]),
       backgroundColor: AppColors.appBodyColor,
-      appBar: KappBar(),
+      appBar: KappBar(
+        isPrefixIcon: selectedPage != 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: pages[selectedPage],
