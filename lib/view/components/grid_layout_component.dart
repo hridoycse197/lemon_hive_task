@@ -9,27 +9,19 @@ class SliverGridWithCustomGeometryLayout extends SliverGridRegularTileLayout {
     SliverGridRegularTileLayout layout,
   ) geometryBuilder;
 
-  SliverGridWithCustomGeometryLayout({
+  const SliverGridWithCustomGeometryLayout({
     required this.geometryBuilder,
-    required int crossAxisCount,
-    required double mainAxisStride,
-    required double crossAxisStride,
-    required double childMainAxisExtent,
-    required double childCrossAxisExtent,
-    required bool reverseCrossAxis,
+    required super.crossAxisCount,
+    required super.mainAxisStride,
+    required super.crossAxisStride,
+    required super.childMainAxisExtent,
+    required super.childCrossAxisExtent,
+    required super.reverseCrossAxis,
   })  : assert(crossAxisCount > 0),
         assert(mainAxisStride >= 0),
         assert(crossAxisStride >= 0),
         assert(childMainAxisExtent >= 0),
-        assert(childCrossAxisExtent >= 0),
-        super(
-          crossAxisCount: crossAxisCount,
-          mainAxisStride: mainAxisStride,
-          crossAxisStride: crossAxisStride,
-          childMainAxisExtent: childMainAxisExtent,
-          childCrossAxisExtent: childCrossAxisExtent,
-          reverseCrossAxis: reverseCrossAxis,
-        );
+        assert(childCrossAxisExtent >= 0);
 
   @override
   SliverGridGeometry getGeometryForChildIndex(int index) {

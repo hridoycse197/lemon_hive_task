@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class CircularLoader extends StatefulWidget {
+  CircularLoader({super.key, this.color = Colors.black});
+  Color color;
+
   @override
+  // ignore: library_private_types_in_public_api
   _CircularLoaderState createState() => _CircularLoaderState();
 }
 
@@ -15,7 +19,7 @@ class _CircularLoaderState extends State<CircularLoader>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     )..repeat();
   }
 
@@ -32,8 +36,9 @@ class _CircularLoaderState extends State<CircularLoader>
         animation: _controller,
         builder: (context, child) {
           return CustomPaint(
-            painter: SnakeLoaderPainter(progress: _controller.value),
-            size: Size(30.0, 30.0),
+            painter: SnakeLoaderPainter(
+                progress: _controller.value, color: widget.color),
+            size: const Size(30.0, 30.0),
           );
         },
       ),
@@ -43,8 +48,8 @@ class _CircularLoaderState extends State<CircularLoader>
 
 class SnakeLoaderPainter extends CustomPainter {
   final double progress;
-
-  SnakeLoaderPainter({required this.progress});
+  Color color;
+  SnakeLoaderPainter({required this.progress, required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -55,19 +60,15 @@ class SnakeLoaderPainter extends CustomPainter {
 
     final double radius = size.width / 3;
     final Offset center = Offset(size.width / 2, size.height / 2);
-    final double startAngle = -pi / 2;
+    const double startAngle = -pi / 2;
     final double sweepAngle = 2 * pi * progress;
 
     // Create a gradient that fades from black to transparent
     final Gradient gradient = SweepGradient(
       startAngle: startAngle,
       endAngle: startAngle + 2 * pi,
-      colors: [
-        Colors.black,
-        Colors.black.withOpacity(.6),
-        Colors.black.withOpacity(.3)
-      ],
-      stops: [0.0, 0.0, 0.0],
+      colors: [color, color.withOpacity(.6), color.withOpacity(.3)],
+      stops: const [0.0, 0.0, 0.0],
     );
 
     // Apply the gradient to the paint
@@ -76,7 +77,7 @@ class SnakeLoaderPainter extends CustomPainter {
     );
 
     // Define the trailing length
-    final double trailingLength =
+    const double trailingLength =
         pi * 1.5; // Increase this value for a longer trailing effect
 
     // Draw the gradient arc

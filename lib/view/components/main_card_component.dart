@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
+import '../../res/app_colors.dart';
 import '../../utils/helper.dart';
 
 class MainCardItemComponent extends StatelessWidget {

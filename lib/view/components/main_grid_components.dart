@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
+import '../../model/charecter_list_model.dart';
+import '../../res/app_colors.dart';
 import '../../utils/helper.dart';
 import 'custom_text_widget.dart';
 
 class MainGridItemComponent extends StatelessWidget {
-  const MainGridItemComponent({
-    super.key,
-  });
+  Results item;
+  MainGridItemComponent({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-            height:mediaQueryHeight( 500.0,context),
+            height: mediaQueryHeight(500.0, context),
             width: 500,
             decoration: kGradientBoxDecoration,
             child: Padding(
@@ -35,14 +35,14 @@ class MainGridItemComponent extends StatelessWidget {
                 width: 150,
                 margin: const EdgeInsets.only(bottom: 15, right: 15),
                 height: 150,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage("assets/images/bg_image.png"),
+                  image: NetworkImage(item.image!),
                 )),
               ),
               KText(
                 text: 'Smith',
-                fontSize: mediaQueryWidth(20,context ),
+                fontSize: mediaQueryWidth(20, context),
                 fontColor: AppColors.whiteColor,
               )
             ],

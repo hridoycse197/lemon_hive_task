@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lemon_hive_task/utils/app_colors.dart';
+import 'package:lemon_hive_task/res/app_colors.dart';
+import 'package:lemon_hive_task/services/splash_services.dart';
 import 'package:lemon_hive_task/utils/helper.dart';
 import 'package:lemon_hive_task/view/components/circular_loader.dart';
 import 'package:lemon_hive_task/view/components/custom_text_widget.dart';
@@ -9,6 +10,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SplashServices().init(context);
     return Scaffold(
       body: Container(
         color: AppColors.primaryColor,
@@ -18,11 +20,16 @@ class SplashScreen extends StatelessWidget {
           children: [
             Positioned(
                 top: 0,
-                right: mediaQueryWidth( -60,context,),
+                right: mediaQueryWidth(
+                  -60,
+                  context,
+                ),
                 child: Image.asset("assets/images/right_top_vector.png")),
             Positioned(
                 top: mediaQueryHeight(
-                     MediaQuery.of(context).size.height / 2 + 110,context,),
+                  MediaQuery.of(context).size.height / 2 + 110,
+                  context,
+                ),
                 right: 0,
                 child: Image.asset("assets/images/right_center_vector.png")),
             Positioned(
@@ -35,11 +42,16 @@ class SplashScreen extends StatelessWidget {
                 child: Image.asset("assets/images/left_bottom_vector.png")),
             Positioned(
                 top: mediaQueryHeight(
-                    MediaQuery.of(context).size.height / 2 - 120, context,),
+                  MediaQuery.of(context).size.height / 2 - 120,
+                  context,
+                ),
                 left: 0,
                 child: Image.asset("assets/images/left_center_vector.png")),
             Positioned(
-                top: mediaQueryHeight( -130,context,),
+                top: mediaQueryHeight(
+                  -130,
+                  context,
+                ),
                 left: 0,
                 child: Image.asset("assets/images/left_top_vector.png")),
             Center(

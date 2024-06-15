@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lemon_hive_task/view/components/main_card_component.dart';
-import 'package:lemon_hive_task/view/components/space_horizontal_widget.dart';
 
-import '../../utils/app_colors.dart';
+import '../../res/app_colors.dart';
 import '../../utils/helper.dart';
 import '../components/custom_text_widget.dart';
 import '../components/space_vertical_widget.dart';

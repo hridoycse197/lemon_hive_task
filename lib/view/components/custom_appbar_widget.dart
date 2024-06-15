@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lemon_hive_task/utils/app_colors.dart';
-import '../../utils/helper.dart';
-import 'custom_text_widget.dart';
-import 'space_horizontal_widget.dart';
+import 'package:lemon_hive_task/res/app_colors.dart';
+
 
 class KappBar extends StatelessWidget implements PreferredSizeWidget {
   bool isPrefixIcon;
