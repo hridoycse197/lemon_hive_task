@@ -6,8 +6,10 @@ import 'package:lemon_hive_task/view_model/data_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SplashServices {
-  Future<void> init(BuildContext context) async {
+  SplashServices._();
+  static Future<void> init(BuildContext context) async {
     final provider = Provider.of<DataViewModel>(context, listen: false);
+
     await Future.delayed(const Duration(seconds: 4));
     final data = await provider.getDataFromLocal();
 

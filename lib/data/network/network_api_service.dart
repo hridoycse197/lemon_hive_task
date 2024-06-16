@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:lemon_hive_task/utils/utils.dart';
 
 import '../app_exceptions.dart';
 import 'base_api_services.dart';
@@ -10,10 +11,12 @@ class NetworkApiService extends BaseApiServices {
   Future getGetResponse(String url) async {
     dynamic responseJson;
     try {
-      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+      final response =
+          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
-      throw FetchDataException("No Internet Connection");
+      Utils.toastMessage("No Internet Connection");
+      throw FetchDataException(" No Internet Connection");
     }
     return responseJson;
   }
@@ -22,10 +25,12 @@ class NetworkApiService extends BaseApiServices {
   Future getPostResponse(String url, dynamic data) async {
     dynamic responseJson;
     try {
-      final response = await http.post(Uri.parse(url), body: data).timeout(const Duration(seconds: 10));
+      final response = await http
+          .post(Uri.parse(url), body: data)
+          .timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
     } on SocketException {
-      throw FetchDataException("No Internet Connection");
+      throw FetchDataException(" No Internet Connection");
     }
     return responseJson;
   }
@@ -43,7 +48,8 @@ class NetworkApiService extends BaseApiServices {
         throw UnauthorisedException(res.body.toString());
 
       default:
-        throw FetchDataException("Error accured while communication with server, statusCode: ${res.statusCode}");
+        throw FetchDataException(
+            "Error accured while communication with server, statusCode: ${res.statusCode}");
     }
   }
 }

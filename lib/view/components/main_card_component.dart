@@ -6,8 +6,12 @@ import '../../utils/helper.dart';
 class MainCardItemComponent extends StatelessWidget {
   double height, width;
   Widget child;
+  double paddingV;
+  double marginV;
   MainCardItemComponent(
       {super.key,
+      this.paddingV = 0,
+      this.marginV = 0,
       required this.height,
       required this.width,
       required this.child});
@@ -22,6 +26,8 @@ class MainCardItemComponent extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
+            padding: EdgeInsets.all(paddingV),
+            margin: EdgeInsets.all(marginV),
             height: height,
             width: width,
             decoration: kInnerDecoration,

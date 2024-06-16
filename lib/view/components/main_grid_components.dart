@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:lemon_hive_task/view/components/circular_loader.dart';
+import 'package:lemon_hive_task/view_model/data_view_model.dart';
+import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../model/charecter_list_model.dart';
 import '../../res/app_colors.dart';
 import '../../utils/helper.dart';
@@ -8,47 +11,61 @@ import 'custom_text_widget.dart';
 class MainGridItemComponent extends StatelessWidget {
   Results item;
   MainGridItemComponent({super.key, required this.item});
-
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-            height: mediaQueryHeight(500.0, context),
-            width: 500,
-            decoration: kGradientBoxDecoration,
-            child: Padding(
-              padding: const EdgeInsets.all(1.0),
-              child: Container(
-                height: 500.0,
-                width: 500,
-                decoration: kInnerDecoration,
-              ),
-            )),
-        Positioned(
-          top: 2,
-          left: 10,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(bottom: 15, right: 15),
-                height: 150,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                  image: NetworkImage(item.image!),
-                )),
-              ),
-              KText(
-                text: 'Smith',
-                fontSize: mediaQueryWidth(20, context),
-                fontColor: AppColors.whiteColor,
-              )
-            ],
+    final provider = Provider.of<DataViewModel>(context);
+    return GestureDetector(
+      onTap: () {
+        provider.singleItemOnTap(item);
+      },
+      child: Stack(
+        children: [
+          Container(
+              height: mediaQueryHeight(500.0, context),
+              width: 500,
+              decoration: kGradientBoxDecoration,
+              child: Padding(
+                padding: const EdgeInsets.all(1.0),
+                child: Container(
+                  height: 500.0,
+                  width: 500,
+                  decoration: kInnerDecoration,
+                ),
+              )),
+          Positioned(
+            top: 2,
+            left: 10,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: mediaQueryWidth(150, context),
+                  margin: const EdgeInsets.only(bottom: 15, right: 15, top: 20),
+                  height: mediaQueryHeight(150, context),
+                  child: CachedNetworkImage(
+                    imageUrl: item.image!,
+                    placeholder: (context, url) => CircularLoader(
+                      color: AppColors.redColor,
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
+                ),
+                SizedBox(
+                  width: mediaQueryWidth(150, context),
+                  child: KText(
+                    text: item.name!,
+                    textOverflow: TextOverflow.ellipsis,
+                    fontSize: mediaQueryWidth(20, context),
+                    fontColor: AppColors.whiteColor,
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

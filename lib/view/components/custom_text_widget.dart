@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +26,7 @@ class KText extends StatelessWidget {
     return Text(
       textScaler: const TextScaler.linear(1.0),
       text,
+      softWrap: true,
       maxLines: maxLines,
       style: GoogleFonts.roboto(
         color: fontColor,

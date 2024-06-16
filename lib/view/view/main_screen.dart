@@ -2,28 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:lemon_hive_task/utils/helper.dart';
 import 'package:lemon_hive_task/view/components/custom_appbar_widget.dart';
 import 'package:lemon_hive_task/view/view/home_screen.dart';
+import 'package:lemon_hive_task/view_model/data_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../../res/app_colors.dart';
 import 'details_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  MainScreen({super.key});
-  List<Widget> pages = [HomeScreen(), const DetailsScreen()];
+  const MainScreen({super.key});
 
-  final ValueNotifier selectedIndex = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: selectedIndex,
+    return Consumer<DataViewModel>(
         builder: (context, value, child) => Scaffold(
               bottomNavigationBar: BottomNavigationBar(
                   onTap: (index) {
-                    kLog(index);
-                    selectedIndex.value = index;
+                    value.setIndex(index);
                   },
                   selectedItemColor: AppColors.primaryColor,
                   unselectedItemColor: AppColors.whiteColor,
-                  currentIndex: selectedIndex.value,
+                  currentIndex: value.selectedIndex,
                   backgroundColor: AppColors.appOutColor,
                   items: const [
                     BottomNavigationBarItem(
@@ -37,11 +35,14 @@ class MainScreen extends StatelessWidget {
                   ]),
               backgroundColor: AppColors.appBodyColor,
               appBar: KappBar(
-                isPrefixIcon: selectedIndex.value != 0,
+                isPrefixIcon: value.selectedIndex != 0,
               ),
               body: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: pages[selectedIndex.value],
+                child: IndexedStack(
+                  index: value.selectedIndex,
+                  children: <Widget>[HomeScreen(), const DetailsScreen()],
+                ),
               ),
             ));
   }

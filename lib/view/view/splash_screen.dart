@@ -7,10 +7,13 @@ import 'package:lemon_hive_task/view/components/custom_text_widget.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
+  Future<void> _initialize(BuildContext context) async {
+    await SplashServices.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    SplashServices().init(context);
+    _initialize(context);
     return Scaffold(
       body: Container(
         color: AppColors.primaryColor,

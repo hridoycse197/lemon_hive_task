@@ -14,43 +14,54 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final ScrollController _scrollController = ScrollController();
+  
   @override
   Widget build(BuildContext context) {
+    final dataProvider = Provider.of<DataViewModel>(
+      context,
+    );
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        Provider.of<DataViewModel>(context, listen: false).getData(true);
+        dataProvider.getData(true);
       }
     });
 
-    return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              opacity: .2,
-              fit: BoxFit.contain,
-              image: AssetImage(
-                "assets/images/bg_image.png",
-              ))),
-      height: fullHeight(context),
-      width: fullWidth(context),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          KText(
-            text: 'All Cast',
-            fontSize: mediaQueryWidth(
-              20,
-              context,
+    return Consumer<DataViewModel>(builder: (context, dataprovider, child) {
+      return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                opacity: .2,
+                fit: BoxFit.contain,
+                image: dataprovider.dataList.isEmpty
+                    ? const AssetImage(
+                        "assets/images/bg_image.png",
+                      )
+                    : NetworkImage(
+                        dataprovider.dataList.first.image!,
+                      ))),
+        height: fullHeight(context),
+        width: fullWidth(context),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            KText(
+              text: 'All Cast',
+              fontSize: mediaQueryWidth(
+                20,
+                context,
+              ),
+              fontColor: AppColors.headingTextColor,
             ),
-            fontColor: AppColors.headingTextColor,
-          ),
-          SpaceVerticalWidget(height: 15),
-          Consumer<DataViewModel>(builder: (context, dataprovider, child) {
-            return Expanded(
+            SpaceVerticalWidget(height: 15),
+            Expanded(
               child: dataprovider.dataList.isEmpty
                   ? Center(
-                      child: KText(text: "No data available"),
+                      child: KText(
+                        text: "No data available",
+                        fontColor: AppColors.whiteColor,
+                      ),
                     )
                   : Stack(
                       children: [
@@ -82,10 +93,10 @@ class HomeScreen extends StatelessWidget {
                           ),
                       ],
                     ),
-            );
-          })
-        ],
-      ),
-    );
+            )
+          ],
+        ),
+      );
+    });
   }
 }
